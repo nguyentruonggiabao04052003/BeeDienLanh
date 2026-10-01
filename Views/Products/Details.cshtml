@@ -1,0 +1,144 @@
+﻿@model BeeDienLanh.Models.Product
+
+@{
+    ViewData["Title"] = Model.ProductName;
+}
+
+<section class="bee-section">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- HÌNH ẢNH -->
+            <div class="col-md-6">
+
+                <div class="bee-product-image"
+                     style="height:450px;">
+
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="@Model.ImageUrl"
+                             alt="@Model.ProductName"
+                             style="width:100%;
+                        height:100%;
+                        object-fit:contain;" />
+                    }
+                    else
+                    {
+                        <span style="font-size:100px;">
+                            📦
+                        </span>
+                    }
+
+                </div>
+
+            </div>
+
+
+            <!-- THÔNG TIN -->
+            <div class="col-md-6">
+
+                @if (Model.Category != null)
+                {
+                    <p class="text-muted">
+                        Danh mục:
+                        @Model.Category.CategoryName
+                    </p>
+                }
+
+                <h1>
+                    @Model.ProductName
+                </h1>
+
+                <h2 class="bee-product-price mt-3">
+                    @Model.Price.ToString("N0")đ
+                </h2>
+
+                <p class="mt-4">
+                    <strong>Số lượng còn:</strong>
+                    @Model.StockQuantity
+                </p>
+
+                <hr />
+
+                <h5>
+                    Mô tả sản phẩm
+                </h5>
+
+                <p>
+                    @Model.Description
+                </p>
+
+
+                <!-- =============================== -->
+                <!-- NÚT THÊM VÀO GIỎ HÀNG -->
+                <!-- =============================== -->
+                @if (User.Identity != null &&
+                                     User.Identity.IsAuthenticated &&
+                                     User.IsInRole("Customer"))
+                {
+                    @if (Model.StockQuantity > 0)
+                    {
+                        <form asp-area=""
+                              asp-controller="Cart"
+                              asp-action="AddToCart"
+                              method="post"
+                              class="mt-3">
+
+                            <input type="hidden"
+                                   name="id"
+                                   value="@Model.ProductId" />
+
+                            <button type="submit"
+                                    class="bee-main-button border-0">
+
+                                <i class="bi bi-cart-plus"></i>
+                                Thêm vào giỏ hàng
+
+                            </button>
+
+                        </form>
+                    }
+                    else
+                    {
+                        <button type="button"
+                                class="btn btn-secondary mt-3"
+                                disabled>
+
+                            Hết hàng
+
+                        </button>
+                    }
+                }
+                else if (User.Identity == null ||
+                         !User.Identity.IsAuthenticated)
+                {
+                    <a asp-area="Identity"
+                       asp-page="/Account/Login"
+                       asp-route-returnUrl="@($"/Products/Details/{Model.ProductId}")"
+                       class="bee-main-button d-inline-block mt-3 text-decoration-none">
+
+                        <i class="bi bi-person"></i>
+                        Đăng nhập để mua hàng
+
+                    </a>
+                }
+                else
+                {
+                    <button type="button"
+                            class="btn btn-secondary mt-3"
+                            disabled>
+
+                        Chỉ khách hàng mới có thể mua sản phẩm
+
+                    </button>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

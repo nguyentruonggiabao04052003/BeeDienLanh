@@ -1,0 +1,27 @@
+﻿@model IEnumerable<BeeDienLanh.Models.Category>
+
+<ul class="bee-menu">
+
+    <li>
+        <a asp-area=""
+           asp-controller="Home"
+           asp-action="Index">
+            Trang chủ
+        </a>
+    </li>
+
+    @foreach (var category in Model)
+    {
+        <li>
+            <a asp-area=""
+               asp-controller="Products"
+               asp-action="Index"
+               asp-route-categoryId="@category.CategoryId">
+
+                @category.CategoryName
+
+            </a>
+        </li>
+    }
+
+</ul>

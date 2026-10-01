@@ -1,0 +1,49 @@
+﻿@model BeeDienLanh.Models.Product
+
+<div class="bee-product-card">
+
+    <div class="bee-product-image">
+
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl"
+                 alt="@Model.ProductName"
+                 style="width:100%; height:100%; object-fit:contain;" />
+        }
+        else
+        {
+            <span>📦</span>
+        }
+
+    </div>
+
+    <div class="bee-product-content">
+
+        @if (Model.Category != null)
+        {
+            <small class="text-muted">
+                @Model.Category.CategoryName
+            </small>
+        }
+
+        <div class="bee-product-name">
+            @Model.ProductName
+        </div>
+
+        <div class="bee-product-price">
+            @Model.Price.ToString("N0")đ
+        </div>
+
+        <a asp-area=""
+           asp-controller="Products"
+           asp-action="Details"
+           asp-route-id="@Model.ProductId"
+           class="bee-product-button">
+
+            Xem chi tiết
+
+        </a>
+
+    </div>
+
+</div>

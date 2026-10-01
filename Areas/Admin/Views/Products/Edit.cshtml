@@ -1,0 +1,170 @@
+﻿@model BeeDienLanh.Models.Product
+
+@{
+    ViewData["Title"] = "Sửa sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">SỬA SẢN PHẨM</h2>
+
+    <form asp-area="Admin"
+          asp-controller="Products"
+          asp-action="Edit"
+          method="post"
+          enctype="multipart/form-data">
+
+        <input type="hidden"
+               asp-for="ProductId" />
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger"></div>
+
+        <!-- TÊN SẢN PHẨM -->
+        <div class="mb-3">
+            <label asp-for="ProductName"
+                   class="form-label">
+                Tên sản phẩm
+            </label>
+
+            <input asp-for="ProductName"
+                   class="form-control" />
+
+            <span asp-validation-for="ProductName"
+                  class="text-danger"></span>
+        </div>
+
+        <!-- GIÁ -->
+        <div class="mb-3">
+            <label asp-for="Price"
+                   class="form-label">
+                Giá
+            </label>
+
+            <input asp-for="Price"
+                   class="form-control" />
+
+            <span asp-validation-for="Price"
+                  class="text-danger"></span>
+        </div>
+
+        <!-- SỐ LƯỢNG TỒN KHO -->
+        <div class="mb-3">
+            <label asp-for="StockQuantity"
+                   class="form-label">
+                Số lượng tồn kho
+            </label>
+
+            <input asp-for="StockQuantity"
+                   class="form-control" />
+
+            <span asp-validation-for="StockQuantity"
+                  class="text-danger"></span>
+        </div>
+
+        <!-- DANH MỤC -->
+        <div class="mb-3">
+            <label asp-for="CategoryId"
+                   class="form-label">
+                ID danh mục
+            </label>
+
+            <input asp-for="CategoryId"
+                   class="form-control" />
+
+            <span asp-validation-for="CategoryId"
+                  class="text-danger"></span>
+        </div>
+
+        <!-- MÔ TẢ -->
+        <div class="mb-3">
+            <label asp-for="Description"
+                   class="form-label">
+                Mô tả
+            </label>
+
+            <textarea asp-for="Description"
+                      class="form-control"
+                      rows="4"></textarea>
+
+            <span asp-validation-for="Description"
+                  class="text-danger"></span>
+        </div>
+
+        <!-- ẢNH HIỆN TẠI -->
+        <div class="mb-3">
+            <label class="form-label">
+                Hình ảnh hiện tại
+            </label>
+
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <div class="mb-2">
+                    <img src="@Model.ImageUrl"
+                         alt="@Model.ProductName"
+                         style="width:180px;
+                    height:180px;
+                    object-fit:contain;
+                    border:1px solid #ddd;
+                    border-radius:8px;
+                    padding:5px;
+                    background:white;" />
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">
+                    Sản phẩm chưa có hình ảnh.
+                </p>
+            }
+        </div>
+
+        <!-- CHỌN ẢNH MỚI -->
+        <div class="mb-3">
+            <label class="form-label">
+                Chọn hình ảnh mới
+            </label>
+
+            <input type="file"
+                   name="imageFile"
+                   class="form-control"
+                   accept=".jpg,.jpeg,.png,.webp" />
+
+            <span class="text-danger">
+                @Html.ValidationMessage("imageFile")
+            </span>
+
+            <small class="text-muted">
+                Nếu không chọn ảnh mới thì hệ thống sẽ giữ nguyên ảnh hiện tại.
+                Chấp nhận JPG, JPEG, PNG, WEBP. Tối đa 5MB.
+            </small>
+        </div>
+
+        <!-- SẢN PHẨM NỔI BẬT -->
+        <div class="form-check mb-3">
+            <input asp-for="IsFeatured"
+                   class="form-check-input" />
+
+            <label asp-for="IsFeatured"
+                   class="form-check-label">
+                Sản phẩm nổi bật
+            </label>
+        </div>
+
+        <!-- NÚT LƯU -->
+        <button type="submit"
+                class="btn btn-warning">
+            Lưu thay đổi
+        </button>
+
+        <!-- NÚT QUAY LẠI -->
+        <a asp-area="Admin"
+           asp-controller="Products"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Quay lại
+        </a>
+
+    </form>
+</div>

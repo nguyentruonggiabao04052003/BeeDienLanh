@@ -1,0 +1,347 @@
+﻿@model IEnumerable<BeeDienLanh.Models.Product>
+
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<!-- THÔNG BÁO THÊM GIỎ HÀNG -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show"
+             role="alert">
+
+            @TempData["SuccessMessage"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+        </div>
+    </div>
+}
+
+<!-- HERO -->
+<section class="bee-hero">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-7">
+
+                <h1>
+                    BEE ĐIỆN LẠNH
+                </h1>
+
+                <p>
+                    Điện máy chính hãng -
+                    Giá tốt mỗi ngày
+                </p>
+
+                <p>
+                    Tivi • Máy lạnh • Tủ lạnh •
+                    Máy giặt • Quạt
+                </p>
+
+                <a href="#sanpham"
+                   class="bee-main-button">
+
+                    KHÁM PHÁ SẢN PHẨM
+
+                </a>
+
+            </div>
+
+            <div class="col-md-5 text-center">
+
+                <div style="font-size:160px">
+                    🐝
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DANH MỤC -->
+<section class="bee-section">
+
+    <div class="container">
+
+        <h2 class="bee-section-title">
+            DANH MỤC SẢN PHẨM
+        </h2>
+
+        <div class="row g-3">
+
+            <!-- TIVI -->
+            <div class="col">
+
+                <a asp-controller="Products"
+                   asp-action="Index"
+                   asp-route-categoryId="1"
+                   class="text-decoration-none text-dark">
+
+                    <div class="bee-category">
+
+                        <div class="bee-category-icon">
+                            📺
+                        </div>
+
+                        <h5>Tivi</h5>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- MÁY LẠNH -->
+            <div class="col">
+
+                <a asp-controller="Products"
+                   asp-action="Index"
+                   asp-route-categoryId="2"
+                   class="text-decoration-none text-dark">
+
+                    <div class="bee-category">
+
+                        <div class="bee-category-icon">
+                            ❄️
+                        </div>
+
+                        <h5>Máy lạnh</h5>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- TỦ LẠNH -->
+            <div class="col">
+
+                <a asp-controller="Products"
+                   asp-action="Index"
+                   asp-route-categoryId="3"
+                   class="text-decoration-none text-dark">
+
+                    <div class="bee-category">
+
+                        <div class="bee-category-icon">
+                            🧊
+                        </div>
+
+                        <h5>Tủ lạnh</h5>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- MÁY GIẶT -->
+            <div class="col">
+
+                <a asp-controller="Products"
+                   asp-action="Index"
+                   asp-route-categoryId="4"
+                   class="text-decoration-none text-dark">
+
+                    <div class="bee-category">
+
+                        <div class="bee-category-icon">
+                            🧺
+                        </div>
+
+                        <h5>Máy giặt</h5>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- QUẠT -->
+            <div class="col">
+
+                <a asp-controller="Products"
+                   asp-action="Index"
+                   asp-route-categoryId="5"
+                   class="text-decoration-none text-dark">
+
+                    <div class="bee-category">
+
+                        <div class="bee-category-icon">
+                            💨
+                        </div>
+
+                        <h5>Quạt</h5>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SẢN PHẨM NỔI BẬT -->
+<section id="sanpham"
+         class="bee-section bg-white">
+
+    <div class="container">
+
+        <h2 class="bee-section-title">
+            SẢN PHẨM NỔI BẬT
+        </h2>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var product in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+
+                        <!-- CARD SẢN PHẨM CŨ -->
+                        <partial name="_ProductCard"
+                                 model="product" />
+
+                        <!-- NÚT THÊM VÀO GIỎ -->
+                        <div class="mt-2">
+
+                            @if (User.Identity != null &&
+                                 User.Identity.IsAuthenticated &&
+                                 User.IsInRole("Customer"))
+                            {
+                                <form asp-controller="Cart"
+                                      asp-action="AddToCart"
+                                      method="post">
+
+                                    <input type="hidden"
+                                           name="id"
+                                           value="@product.ProductId" />
+
+                                    <button type="submit"
+                                            class="btn btn-warning w-100 fw-bold">
+
+                                        🛒 Thêm vào giỏ hàng
+
+                                    </button>
+
+                                </form>
+                            }
+                            else if (User.Identity == null ||
+                                     !User.Identity.IsAuthenticated)
+                            {
+                                <a asp-area="Identity"
+                                   asp-page="/Account/Login"
+                                   asp-route-returnUrl="/"
+                                   class="btn btn-warning w-100 fw-bold">
+
+                                    🔐 Đăng nhập để mua hàng
+
+                                </a>
+                            }
+                            else
+                            {
+                                <button type="button"
+                                        class="btn btn-secondary w-100"
+                                        disabled>
+
+                                    Chỉ dành cho khách hàng
+
+                                </button>
+                            }
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+
+                <p>
+                    Hiện chưa có sản phẩm nổi bật.
+                </p>
+
+            </div>
+        }
+
+    </div>
+
+</section>
+
+
+<!-- CAM KẾT -->
+<section class="bee-section">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+
+                <h3>🚚</h3>
+
+                <h5>Giao hàng nhanh</h5>
+
+                <p>
+                    Giao hàng tận nơi,
+                    nhanh chóng và an toàn.
+                </p>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <h3>🛡️</h3>
+
+                <h5>Hàng chính hãng</h5>
+
+                <p>
+                    Sản phẩm có nguồn gốc
+                    và bảo hành rõ ràng.
+                </p>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <h3>☎️</h3>
+
+                <h5>Hỗ trợ khách hàng</h5>
+
+                <p>
+                    Hỗ trợ và tư vấn
+                    trong quá trình mua hàng.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,301 @@
+html {
+    font-size: 14px;
+}
+
+body {
+    margin: 0;
+    background: #f5f5f5;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    color: #222;
+}
+
+/* ÉP FONT TIẾNG VIỆT CHO TOÀN WEBSITE */
+body,
+button,
+input,
+select,
+textarea,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.bee-topbar {
+    background: #ffc107;
+}
+
+.bee-logo {
+    color: #111;
+    font-size: 25px;
+    font-weight: 800;
+    text-decoration: none;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+}
+
+    .bee-logo:hover {
+        color: #111;
+    }
+
+
+/* SEARCH */
+
+.bee-search {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    .bee-search input {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 12px 15px;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    }
+
+    .bee-search button {
+        border: none;
+        background: #111;
+        color: white;
+        width: 55px;
+    }
+
+
+/* ACCOUNT */
+
+.bee-header-link {
+    color: #111;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+    .bee-header-link:hover {
+        color: white;
+    }
+
+.bee-cart {
+    background: #111;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+    .bee-cart:hover {
+        color: #ffc107;
+    }
+
+
+/* =========================
+   MENU
+========================= */
+
+.bee-navbar {
+    background: #111;
+}
+
+.bee-menu {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+}
+
+    .bee-menu li {
+        flex: 1;
+    }
+
+    .bee-menu a {
+        display: block;
+        text-align: center;
+        padding: 15px;
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+    }
+
+        .bee-menu a:hover {
+            background: #ffc107;
+            color: #111;
+        }
+
+
+/* =========================
+   HERO
+========================= */
+
+.bee-hero {
+    background: linear-gradient(110deg, #ffc107 50%, #ffda63 50%);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+}
+
+    .bee-hero h1 {
+        font-size: 52px;
+        font-weight: 900;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+    }
+
+    .bee-hero p {
+        font-size: 21px;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+    }
+
+.bee-main-button {
+    background: #111;
+    color: white;
+    padding: 13px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 700;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+}
+
+    .bee-main-button:hover {
+        background: white;
+        color: #111;
+    }
+
+
+/* =========================
+   SECTION
+========================= */
+
+.bee-section {
+    padding: 55px 0;
+}
+
+.bee-section-title {
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 35px;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+.bee-category {
+    background: white;
+    padding: 30px 15px;
+    text-align: center;
+    border-radius: 12px;
+    transition: 0.25s;
+    height: 100%;
+    border: 1px solid #eee;
+}
+
+    .bee-category:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 7px 25px rgba(0, 0, 0, .12);
+    }
+
+.bee-category-icon {
+    font-size: 50px;
+}
+
+.bee-category h5 {
+    margin-top: 12px;
+    font-weight: 700;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+}
+
+
+/* =========================
+   PRODUCT
+========================= */
+
+.bee-product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    transition: 0.25s;
+    height: 100%;
+}
+
+    .bee-product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 7px 25px rgba(0, 0, 0, .12);
+    }
+
+.bee-product-image {
+    height: 210px;
+    background: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+}
+
+.bee-product-content {
+    padding: 18px;
+}
+
+.bee-product-name {
+    font-weight: 700;
+    min-height: 48px;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+}
+
+.bee-product-price {
+    color: #d70018;
+    font-size: 21px;
+    font-weight: 800;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+}
+
+.bee-product-button {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    background: #ffc107;
+    color: #111;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+}
+
+    .bee-product-button:hover {
+        background: #111;
+        color: white;
+    }
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.bee-footer {
+    background: #111;
+    color: #ddd;
+    padding: 50px 0 20px;
+}
+
+    .bee-footer h4,
+    .bee-footer h5 {
+        color: #ffc107;
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif !important;
+    }

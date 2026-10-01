@@ -1,0 +1,68 @@
+﻿@model BeeDienLanh.Models.Product
+
+@{
+    ViewData["Title"] = "Xóa sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-danger">
+        XÓA SẢN PHẨM
+    </h2>
+
+    <div class="alert alert-warning mt-3">
+        Bạn có chắc chắn muốn xóa sản phẩm này không?
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+
+            <h4>@Model.ProductName</h4>
+
+            <p>
+                <strong>ID:</strong>
+                @Model.ProductId
+            </p>
+
+            <p>
+                <strong>Giá:</strong>
+                @Model.Price.ToString("N0") VNĐ
+            </p>
+
+            <p>
+                <strong>Số lượng:</strong>
+                @Model.StockQuantity
+            </p>
+
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Model.ImageUrl"
+                     alt="@Model.ProductName"
+                     style="max-width:200px;"
+                     class="mb-3" />
+            }
+
+            <form asp-area="Admin"
+                  asp-controller="Products"
+                  asp-action="Delete"
+                  asp-route-id="@Model.ProductId"
+                  method="post">
+
+                <button type="submit"
+                        class="btn btn-danger">
+                    Xác nhận xóa
+                </button>
+
+                <a asp-area="Admin"
+                   asp-controller="Products"
+                   asp-action="Index"
+                   class="btn btn-secondary">
+                    Hủy
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+</div>

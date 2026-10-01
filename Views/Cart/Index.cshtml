@@ -1,0 +1,146 @@
+﻿@model List<BeeDienLanh.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Giỏ hàng";
+}
+
+<div class="container mt-4 mb-5">
+
+    <h2 class="mb-4">GIỎ HÀNG CỦA BẠN</h2>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-info">
+            Giỏ hàng hiện đang trống.
+        </div>
+
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="btn btn-primary">
+            Tiếp tục mua hàng
+        </a>
+    }
+    else
+    {
+        <table class="table table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Hình ảnh</th>
+                    <th>Sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.ImageUrl))
+                            {
+                                <img src="@item.ImageUrl"
+                                     alt="@item.ProductName"
+                                     style="width:90px;height:90px;object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <span>Không có ảnh</span>
+                            }
+                        </td>
+
+                        <td>@item.ProductName</td>
+
+                        <td>
+                            @item.Price.ToString("N0") VNĐ
+                        </td>
+
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+
+                                <form asp-controller="Cart"
+                                      asp-action="Decrease"
+                                      method="post">
+
+                                    <input type="hidden"
+                                           name="id"
+                                           value="@item.ProductId" />
+
+                                    <button type="submit"
+                                            class="btn btn-outline-secondary btn-sm">
+                                        -
+                                    </button>
+                                </form>
+
+                                <strong>@item.Quantity</strong>
+
+                                <form asp-controller="Cart"
+                                      asp-action="Increase"
+                                      method="post">
+
+                                    <input type="hidden"
+                                           name="id"
+                                           value="@item.ProductId" />
+
+                                    <button type="submit"
+                                            class="btn btn-outline-secondary btn-sm">
+                                        +
+                                    </button>
+                                </form>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            <strong>
+                                @item.Total.ToString("N0") VNĐ
+                            </strong>
+                        </td>
+
+                        <td>
+                            <form asp-controller="Cart"
+                                  asp-action="Remove"
+                                  method="post">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="@item.ProductId" />
+
+                                <button type="submit"
+                                        class="btn btn-danger btn-sm">
+                                    Xóa
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-end mt-4">
+
+            <h4>
+                Tổng tiền:
+                <strong>
+                    @Model.Sum(x => x.Total).ToString("N0") VNĐ
+                </strong>
+            </h4>
+
+            <a asp-controller="Home"
+               asp-action="Index"
+               class="btn btn-secondary mt-2">
+                Tiếp tục mua hàng
+            </a>
+
+            <a asp-controller="Checkout"
+               asp-action="Index"
+               class="btn btn-success mt-2">
+                Thanh toán
+            </a>
+
+        </div>
+    }
+
+</div>
